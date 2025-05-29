@@ -29,7 +29,7 @@ class AppRouter {
         GoRoute(
           path: '/home',
           name: RouteNames.home,
-          pageBuilder: (context, state) => MaterialPage(child: HomeScreen()), aa
+          pageBuilder: (context, state) => MaterialPage(child: HomeScreen()),
         ),
       ]
     );
