@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../views/detail_screen.dart'; // Perhatikan penggunaan '../' untuk naik satu level direktori
+import '../views/detail_screen.dart'; 
 
 class CategoryItem extends StatelessWidget {
   final IconData iconData;

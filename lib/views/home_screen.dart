@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tahu_nih/routes/route_names.dart';
 import 'package:tahu_nih/views/news_detail_screen.dart';
 import '../models/article.dart';
 import 'detail_screen.dart';
 import '../widgets/category_item.dart';
 import '../widgets/news_list_item.dart';
 import '../services/bookmark_service.dart';
-import 'bookmark_screen.dart'; // Impor BookmarkScreen
+import 'bookmark_screen.dart'; 
 
 class HomeScreen extends StatefulWidget {
-  // Tidak perlu lagi menerima bookmarkService dari luar jika diinisialisasi di sini
   const HomeScreen({super.key});
 
   @override
@@ -16,23 +17,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0; // State untuk BottomNavigationBar
-  late final BookmarkService _bookmarkService; // Inisialisasi di initState
+  int _selectedIndex = 0; 
+  late final BookmarkService _bookmarkService; 
 
   @override
   void initState() {
     super.initState();
     _bookmarkService =
-        BookmarkService(); // Inisialisasi BookmarkService di sini
+        BookmarkService();
     _bookmarkService.addListener(_onBookmarkChanged);
   }
 
   @override
   void dispose() {
     _bookmarkService.removeListener(_onBookmarkChanged);
-    // Jika BookmarkService dibuat di sini dan tidak akan digunakan lagi,
-    // pertimbangkan untuk menambahkan metode dispose() di BookmarkService jika ada resource yang perlu dilepas.
-    // Untuk ChangeNotifier, listener sudah cukup.
     super.dispose();
   }
 
@@ -44,24 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onItemTapped(int index) {
     if (index == 1) {
-      // Indeks untuk Bookmarks
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder:
-              (context) => BookmarkScreen(
-                bookmarkService: _bookmarkService,
-              ), // Teruskan instance service
-        ),
-      );
-      // Kita tidak mengubah _selectedIndex di sini karena kita navigasi ke halaman baru
-      // Jika ingin tab tetap aktif setelah kembali, bisa disimpan _selectedIndex nya
-      // Namun, karena ini navigasi push, saat kembali, _selectedIndex lama akan tetap.
+      context.goNamed(RouteNames.bookmarks, extra: BookmarkScreenArgs(bookmarkService: _bookmarkService));
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder:
+      //         (context) => BookmarkScreen(
+      //           bookmarkService: _bookmarkService,
+      //         ),
+      //   ),
+      // );
     } else {
-      // Untuk tab lain (misal "Menu"), kita hanya update index jika ada behavior berbeda
-      // atau jika itu mengganti body dari HomeScreen sendiri (bukan navigasi push).
-      // Untuk kasus ini, jika index 0 (Menu) adalah HomeScreen itu sendiri,
-      // kita bisa pastikan _selectedIndex diatur.
       setState(() {
         _selectedIndex = index;
       });
@@ -76,7 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       body: CustomScrollView(
-        // ... (isi CustomScrollView tetap sama seperti sebelumnya) ...
         slivers: <Widget>[
           SliverAppBar(
             leading: Icon(
@@ -245,11 +235,11 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Bookmarks',
           ),
         ],
-        currentIndex: _selectedIndex, // Gunakan _selectedIndex lokal
+        currentIndex: _selectedIndex,
         selectedItemColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
-        onTap: _onItemTapped, // Panggil method _onItemTapped
+        onTap: _onItemTapped,
       ),
     );
   }

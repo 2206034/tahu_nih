@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tahu_nih/routes/route_names.dart';
 import 'package:tahu_nih/views/home_screen.dart';
 import 'package:tahu_nih/views/news_detail_screen.dart';
-// pastikan path import model article sudah benar
 import '../models/article.dart';
 import '../services/bookmark_service.dart';
 import '../widgets/news_list_item.dart';
 import 'detail_screen.dart';
+
+class BookmarkScreenArgs {
+  final BookmarkService bookmarkService;
+
+  BookmarkScreenArgs({required this.bookmarkService});
+}
 
 class BookmarkScreen extends StatefulWidget {
   final BookmarkService bookmarkService;
@@ -17,8 +24,8 @@ class BookmarkScreen extends StatefulWidget {
 }
 
 class _BookmarkScreenState extends State<BookmarkScreen> {
-  int _selectedIndex = 1; // State untuk BottomNavigationBar
-  late final BookmarkService _bookmarkService; // Inisialisasi di initState
+  int _selectedIndex = 1;
+  // late final BookmarkService _bookmarkService; 
 
   @override
   void initState() {
@@ -34,21 +41,9 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
 
   void _onItemTapped(int index) {
     if (index == 0) {
-      // Indeks untuk Bookmarks
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(), // Teruskan instance service
-        ),
-      );
-      // Kita tidak mengubah _selectedIndex di sini karena kita navigasi ke halaman baru
-      // Jika ingin tab tetap aktif setelah kembali, bisa disimpan _selectedIndex nya
-      // Namun, karena ini navigasi push, saat kembali, _selectedIndex lama akan tetap.
+      // Navigator.pop(context); 
+      context.goNamed(RouteNames.home);
     } else {
-      // Untuk tab lain (misal "Menu"), kita hanya update index jika ada behavior berbeda
-      // atau jika itu mengganti body dari HomeScreen sendiri (bukan navigasi push).
-      // Untuk kasus ini, jika index 0 (Menu) adalah HomeScreen itu sendiri,
-      // kita bisa pastikan _selectedIndex diatur.
       setState(() {
         _selectedIndex = index;
       });
@@ -70,7 +65,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
       appBar: AppBar(
         title: const Text(
           'My Bookmarks',
-        ), // Tombol kembali akan otomatis ditambahkan oleh Navigator
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.edit_outlined),
@@ -109,7 +104,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                                 article: article,
                                 bookmarkService:
                                     widget
-                                        .bookmarkService, // widget.bookmarkService di sini
+                                        .bookmarkService,
                               ),
                         ),
                       );
@@ -131,11 +126,11 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
             label: 'Bookmarks',
           ),
         ],
-        currentIndex: _selectedIndex, // Gunakan _selectedIndex lokal
+        currentIndex: _selectedIndex,
         selectedItemColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
-        onTap: _onItemTapped, // Panggil method _onItemTapped
+        onTap: _onItemTapped, 
       ),
       // Tidak ada BottomNavigationBar di sini
     );

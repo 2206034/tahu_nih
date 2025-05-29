@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/article.dart'; // Impor model Article
-import '../services/bookmark_service.dart'; // Impor BookmarkService
+import '../models/article.dart';
+import '../services/bookmark_service.dart';
 
 class NewsListItem extends StatelessWidget {
-  final Article article; // Gunakan objek Article
-  final BookmarkService bookmarkService; // Untuk akses status dan aksi bookmark
+  final Article article;
+  final BookmarkService bookmarkService; 
   final VoidCallback? onTap;
 
   const NewsListItem({
@@ -16,7 +16,6 @@ class NewsListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Dapatkan status bookmark saat ini
     final bool isCurrentlyBookmarked = bookmarkService.isBookmarked(article.id);
 
     return InkWell(

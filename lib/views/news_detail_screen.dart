@@ -1,5 +1,3 @@
-// lib/news_detail_screen.dart
-
 import 'package:flutter/material.dart';
 import '../models/article.dart';
 import '../services/bookmark_service.dart';
@@ -22,7 +20,6 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
   @override
   void initState() {
     super.initState();
-    // Dengarkan perubahan pada BookmarkService untuk memperbarui ikon bookmark
     widget.bookmarkService.addListener(_onBookmarkChanged);
   }
 
@@ -33,7 +30,6 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
   }
 
   void _onBookmarkChanged() {
-    // Panggil setState untuk membangun ulang widget dengan status bookmark terbaru
     if (mounted) {
       setState(() {});
     }
@@ -45,7 +41,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detail Berita'), // Atau bisa juga widget.article.headline
+        title: const Text('Detail Berita'),
         actions: [
           IconButton(
             icon: Icon(
@@ -63,7 +59,6 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Placeholder Gambar (sesuai desain)
             Container(
               height: 200,
               width: double.infinity,
@@ -102,7 +97,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
             // Full Content
             Text(
               widget.article.fullContent,
-              style: const TextStyle(fontSize: 16, height: 1.5), // height untuk spasi antar baris
+              style: const TextStyle(fontSize: 16, height: 1.5),
             ),
           ],
         ),

@@ -1,5 +1,3 @@
-// lib/services/bookmark_service.dart
-
 import 'package:flutter/foundation.dart';
 import '../models/article.dart';
 
@@ -10,7 +8,6 @@ class BookmarkService extends ChangeNotifier {
       headline: 'Headline Berita Utama yang Menarik',
       description: 'Deskripsi singkat mengenai isi berita utama ini akan muncul di sini...',
       timeAgo: 'Today • 23 min',
-      // MODIFIKASI DIMULAI
       supportingText: 'Ini adalah teks pendukung untuk berita utama.',
       publishedDate: 'May 30, 2025',
       fullContent: '''
@@ -18,14 +15,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       '''
-      // MODIFIKASI SELESAI
     ),
     Article(
       id: '2',
       headline: 'Berita Kedua yang Tak Kalah Penting',
       description: 'Ini adalah deskripsi untuk berita kedua yang juga relevan dan informatif.',
       timeAgo: 'Today • 45 min',
-      // MODIFIKASI DIMULAI
       supportingText: 'Teks pendukung untuk berita kedua yang penting.',
       publishedDate: 'May 30, 2025',
       fullContent: '''
@@ -33,9 +28,7 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 
 Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
       '''
-      // MODIFIKASI SELESAI
     ),
-    // ... (Tambahkan field baru untuk artikel lainnya juga) ...
     Article(
       id: '3',
       headline: 'Perkembangan Terbaru di Dunia Teknologi',
