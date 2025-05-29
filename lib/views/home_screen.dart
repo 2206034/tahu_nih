@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tahu_nih/views/news_detail_screen.dart';
 import '../models/article.dart';
 import 'detail_screen.dart';
 import '../widgets/category_item.dart';
@@ -21,7 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _bookmarkService = BookmarkService(); // Inisialisasi BookmarkService di sini
+    _bookmarkService =
+        BookmarkService(); // Inisialisasi BookmarkService di sini
     _bookmarkService.addListener(_onBookmarkChanged);
   }
 
@@ -41,11 +43,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onItemTapped(int index) {
-    if (index == 1) { // Indeks untuk Bookmarks
+    if (index == 1) {
+      // Indeks untuk Bookmarks
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => BookmarkScreen(bookmarkService: _bookmarkService), // Teruskan instance service
+          builder:
+              (context) => BookmarkScreen(
+                bookmarkService: _bookmarkService,
+              ), // Teruskan instance service
         ),
       );
       // Kita tidak mengubah _selectedIndex di sini karena kita navigasi ke halaman baru
@@ -73,14 +79,32 @@ class _HomeScreenState extends State<HomeScreen> {
         // ... (isi CustomScrollView tetap sama seperti sebelumnya) ...
         slivers: <Widget>[
           SliverAppBar(
-            leading: Icon(Icons.account_circle_outlined, size: 30, color: appBarTheme.iconTheme?.color ?? Colors.black),
-            title: Text('TahuNih!', style: appBarTheme.titleTextStyle ?? const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+            leading: Icon(
+              Icons.account_circle_outlined,
+              size: 30,
+              color: appBarTheme.iconTheme?.color ?? Colors.black,
+            ),
+            title: Text(
+              'TahuNih!',
+              style:
+                  appBarTheme.titleTextStyle ??
+                  const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
             actions: [
               IconButton(
-                icon: Icon(Icons.search, color: appBarTheme.iconTheme?.color ?? Colors.black),
+                icon: Icon(
+                  Icons.search,
+                  color: appBarTheme.iconTheme?.color ?? Colors.black,
+                ),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Fitur pencarian belum diimplementasikan')),
+                    const SnackBar(
+                      content: Text('Fitur pencarian belum diimplementasikan'),
+                    ),
                   );
                 },
               ),
@@ -88,7 +112,10 @@ class _HomeScreenState extends State<HomeScreen> {
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(60.0),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: 'Cari...',
@@ -107,7 +134,8 @@ class _HomeScreenState extends State<HomeScreen> {
             pinned: false,
             floating: true,
             snap: true,
-            backgroundColor: appBarTheme.backgroundColor ?? scaffoldBackgroundColor,
+            backgroundColor:
+                appBarTheme.backgroundColor ?? scaffoldBackgroundColor,
             elevation: appBarTheme.elevation ?? 0,
           ),
           SliverToBoxAdapter(
@@ -121,11 +149,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: const [
-                        CategoryItem(iconData: Icons.movie_filter_outlined, label: 'Entertainment'),
-                        CategoryItem(iconData: Icons.music_note_outlined, label: 'Music'),
-                        CategoryItem(iconData: Icons.sports_esports_outlined, label: 'Games'),
-                        CategoryItem(iconData: Icons.article_outlined, label: 'News'),
-                        CategoryItem(iconData: Icons.lightbulb_outline, label: 'Ideas'),
+                        CategoryItem(
+                          iconData: Icons.movie_filter_outlined,
+                          label: 'Entertainment',
+                        ),
+                        CategoryItem(
+                          iconData: Icons.music_note_outlined,
+                          label: 'Music',
+                        ),
+                        CategoryItem(
+                          iconData: Icons.sports_esports_outlined,
+                          label: 'Games',
+                        ),
+                        CategoryItem(
+                          iconData: Icons.article_outlined,
+                          label: 'News',
+                        ),
+                        CategoryItem(
+                          iconData: Icons.lightbulb_outline,
+                          label: 'Ideas',
+                        ),
                       ],
                     ),
                   ),
@@ -135,14 +178,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       const Text(
                         'Hot News',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.arrow_forward),
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const DetailScreen(title: 'Semua Hot News')),
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => const DetailScreen(
+                                    title: 'Semua Hot News',
+                                  ),
+                            ),
                           );
                         },
                       ),
@@ -161,12 +212,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => DetailScreen(title: article.headline)),
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => NewsDetailScreen(
+                                    article: article,
+                                    bookmarkService: _bookmarkService,
+                                  ),
+                            ),
                           );
                         },
                       );
                     },
-                    separatorBuilder: (context, index) => const Divider(height: 30),
+                    separatorBuilder:
+                        (context, index) => const Divider(height: 30),
                   ),
                 ],
               ),

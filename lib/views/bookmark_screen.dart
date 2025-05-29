@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tahu_nih/views/home_screen.dart';
+import 'package:tahu_nih/views/news_detail_screen.dart';
 // pastikan path import model article sudah benar
-import '../models/article.dart'; 
+import '../models/article.dart';
 import '../services/bookmark_service.dart';
 import '../widgets/news_list_item.dart';
 import 'detail_screen.dart';
@@ -19,7 +20,6 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
   int _selectedIndex = 1; // State untuk BottomNavigationBar
   late final BookmarkService _bookmarkService; // Inisialisasi di initState
 
-
   @override
   void initState() {
     super.initState();
@@ -33,7 +33,8 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
   }
 
   void _onItemTapped(int index) {
-    if (index == 0) { // Indeks untuk Bookmarks
+    if (index == 0) {
+      // Indeks untuk Bookmarks
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -60,54 +61,64 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
     }
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
-    List<Article> bookmarkedArticles = widget.bookmarkService.bookmarkedArticles;
+    List<Article> bookmarkedArticles =
+        widget.bookmarkService.bookmarkedArticles;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Bookmarks'), // Tombol kembali akan otomatis ditambahkan oleh Navigator
+        title: const Text(
+          'My Bookmarks',
+        ), // Tombol kembali akan otomatis ditambahkan oleh Navigator
         actions: [
           IconButton(
             icon: const Icon(Icons.edit_outlined),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Fitur edit belum diimplementasikan')),
+                const SnackBar(
+                  content: Text('Fitur edit belum diimplementasikan'),
+                ),
               );
             },
           ),
         ],
       ),
-      body: bookmarkedArticles.isEmpty
-          ? const Center(
-              child: Text(
-                'No articles bookmarked yet.',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+      body:
+          bookmarkedArticles.isEmpty
+              ? const Center(
+                child: Text(
+                  'No articles bookmarked yet.',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+              )
+              : ListView.separated(
+                padding: const EdgeInsets.all(16.0),
+                itemCount: bookmarkedArticles.length,
+                itemBuilder: (context, index) {
+                  final article = bookmarkedArticles[index];
+                  return NewsListItem(
+                    article: article,
+                    bookmarkService: widget.bookmarkService,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => NewsDetailScreen(
+                                article: article,
+                                bookmarkService:
+                                    widget
+                                        .bookmarkService, // widget.bookmarkService di sini
+                              ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                separatorBuilder: (context, index) => const Divider(),
               ),
-            )
-          : ListView.separated(
-              padding: const EdgeInsets.all(16.0),
-              itemCount: bookmarkedArticles.length,
-              itemBuilder: (context, index) {
-                final article = bookmarkedArticles[index];
-                return NewsListItem(
-                  article: article,
-                  bookmarkService: widget.bookmarkService,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailScreen(title: article.headline),
-                      ),
-                    );
-                  },
-                );
-              },
-              separatorBuilder: (context, index) => const Divider(),
-            ),
-            bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
