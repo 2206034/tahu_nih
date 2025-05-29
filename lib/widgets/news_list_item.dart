@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-// Tidak perlu import detail_screen.dart di sini karena onTap di-handle dari luar
+import '../models/article.dart'; // Impor model Article
+import '../services/bookmark_service.dart'; // Impor BookmarkService
 
 class NewsListItem extends StatelessWidget {
-  final String headline;
-  final String description;
-  final String timeAgo;
+  final Article article; // Gunakan objek Article
+  final BookmarkService bookmarkService; // Untuk akses status dan aksi bookmark
   final VoidCallback? onTap;
 
   const NewsListItem({
     super.key,
-    required this.headline,
-    required this.description,
-    required this.timeAgo,
+    required this.article,
+    required this.bookmarkService,
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
+    // Dapatkan status bookmark saat ini
+    final bool isCurrentlyBookmarked = bookmarkService.isBookmarked(article.id);
+
     return InkWell(
       onTap: onTap,
       child: Padding(
@@ -39,25 +41,35 @@ class NewsListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    headline,
+                    article.headline,
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    description,
+                    article.description,
                     style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    timeAgo,
+                    article.timeAgo,
                     style: TextStyle(fontSize: 12, color: Colors.grey[500]),
                   ),
                 ],
               ),
+            ),
+            // Tombol Bookmark
+            IconButton(
+              icon: Icon(
+                isCurrentlyBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                color: isCurrentlyBookmarked ? Theme.of(context).primaryColor : Colors.grey,
+              ),
+              onPressed: () {
+                bookmarkService.toggleBookmark(article.id);
+              },
             ),
           ],
         ),
