@@ -84,21 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            actions: [
-              IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: appBarTheme.iconTheme?.color ?? Colors.black,
-                ),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Fitur pencarian belum diimplementasikan'),
-                    ),
-                  );
-                },
-              ),
-            ],
+            
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(60.0),
               child: Padding(
@@ -130,91 +116,101 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric( vertical: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 120,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: const [
-                        CategoryItem(
-                          iconData: Icons.movie_filter_outlined,
-                          label: 'Entertainment',
+                  Container(
+                    color: const Color.fromARGB(255, 27, 95, 177),
+                    padding: const EdgeInsets.symmetric(vertical: 12.0),
+                    child: SizedBox(
+                      height: 120,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: const [
+                          CategoryItem(
+                            iconData: Icons.movie_filter_outlined,
+                            label: 'Entertainment',
+                          ),
+                          CategoryItem(
+                            iconData: Icons.music_note_outlined,
+                            label: 'Music',
+                          ),
+                          CategoryItem(
+                            iconData: Icons.sports_esports_outlined,
+                            label: 'Games',
+                          ),
+                          CategoryItem(
+                            iconData: Icons.article_outlined,
+                            label: 'News',
+                          ),
+                          CategoryItem(
+                            iconData: Icons.lightbulb_outline,
+                            label: 'Ideas',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Hot News',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        CategoryItem(
-                          iconData: Icons.music_note_outlined,
-                          label: 'Music',
-                        ),
-                        CategoryItem(
-                          iconData: Icons.sports_esports_outlined,
-                          label: 'Games',
-                        ),
-                        CategoryItem(
-                          iconData: Icons.article_outlined,
-                          label: 'News',
-                        ),
-                        CategoryItem(
-                          iconData: Icons.lightbulb_outline,
-                          label: 'Ideas',
+                        IconButton(
+                          icon: const Icon(Icons.arrow_forward),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => const DetailScreen(
+                                      title: 'Semua Hot News',
+                                    ),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Hot News',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.arrow_forward),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => const DetailScreen(
-                                    title: 'Semua Hot News',
-                                  ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
                   const SizedBox(height: 16),
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: articlesToDisplay.length,
-                    itemBuilder: (context, index) {
-                      final article = articlesToDisplay[index];
-                      return NewsListItem(
-                        article: article,
-                        bookmarkService: _bookmarkService, // Teruskan service
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => NewsDetailScreen(
-                                    article: article,
-                                    bookmarkService: _bookmarkService,
-                                  ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    separatorBuilder:
-                        (context, index) => const Divider(height: 30),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: articlesToDisplay.length,
+                      itemBuilder: (context, index) {
+                        final article = articlesToDisplay[index];
+                        return NewsListItem(
+                          article: article,
+                          bookmarkService: _bookmarkService, // Teruskan service
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => NewsDetailScreen(
+                                      article: article,
+                                      bookmarkService: _bookmarkService,
+                                    ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      separatorBuilder:
+                          (context, index) => const Divider(height: 30),
+                    ),
                   ),
                 ],
               ),

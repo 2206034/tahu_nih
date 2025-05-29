@@ -66,18 +66,6 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
         title: const Text(
           'My Bookmarks',
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.edit_outlined),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Fitur edit belum diimplementasikan'),
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body:
           bookmarkedArticles.isEmpty
