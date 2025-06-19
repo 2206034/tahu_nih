@@ -32,23 +32,23 @@ class AppRouter {
           name: RouteNames.home,
           pageBuilder: (context, state) => MaterialPage(child: HomeScreen()),
         ),
-        GoRoute(
-          path: '/bookmarks',
-          name: RouteNames.bookmarks,
-          pageBuilder: (context, GoRouterState state) {
-            final args = state.extra as BookmarkScreenArgs?;
+        // GoRoute(
+        //   path: '/bookmarks',
+        //   name: RouteNames.bookmarks,
+        //   pageBuilder: (context, GoRouterState state) {
+        //     final args = state.extra as BookmarkScreenArgs?;
 
-            if (args != null) {
-              return MaterialPage(
-                child: BookmarkScreen(bookmarkService: args.bookmarkService),
-              );
-            } else {
-              return MaterialPage(
-                child: Scaffold(appBar: AppBar(title: Text("error"))),
-              );
-            }
-          },
-        ),
+        //     if (args != null) {
+        //       return MaterialPage(
+        //         child: BookmarkScreen(bookmarkService: args.bookmarkService),
+        //       );
+        //     } else {
+        //       return MaterialPage(
+        //         child: Scaffold(appBar: AppBar(title: Text("error"))),
+        //       );
+        //     }
+        //   },
+        // ),
       ],
     );
   }

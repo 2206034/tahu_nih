@@ -1,57 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:tahu_nih/models/news_article.dart';
 import '../models/article.dart';
 import '../services/bookmark_service.dart';
 
-class NewsDetailScreen extends StatefulWidget {
-  final Article article;
-  final BookmarkService bookmarkService;
+class NewsDetailScreen extends StatelessWidget {
+  final NewsArticle article;
 
-  const NewsDetailScreen({
-    super.key,
-    required this.article,
-    required this.bookmarkService,
-  });
+  const NewsDetailScreen({required this.article, Key? key}) : super(key: key);
 
-  @override
-  State<NewsDetailScreen> createState() => _NewsDetailScreenState();
-}
-
-class _NewsDetailScreenState extends State<NewsDetailScreen> {
-  @override
-  void initState() {
-    super.initState();
-    widget.bookmarkService.addListener(_onBookmarkChanged);
-  }
-
-  @override
-  void dispose() {
-    widget.bookmarkService.removeListener(_onBookmarkChanged);
-    super.dispose();
-  }
-
-  void _onBookmarkChanged() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
-    bool isBookmarked = widget.bookmarkService.isBookmarked(widget.article.id);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail Berita'),
         actions: [
-          IconButton(
-            icon: Icon(
-              isBookmarked ? Icons.bookmark : Icons.bookmark_outline,
-              color: isBookmarked ? Theme.of(context).primaryColor : null,
-            ),
-            onPressed: () {
-              widget.bookmarkService.toggleBookmark(widget.article.id);
-            },
-          ),
+          // IconButton(
+          //   icon: Icon(
+          //     bookmarkService.isBookmarked ? Icons.bookmark : Icons.bookmark_outline,
+          //     color: isBookmarked ? Theme.of(context).primaryColor : null,
+          //   ),
+          //   onPressed: () {
+          //     bookmarkService.toggleBookmark(article.id);
+          //   },
+          // ),
         ],
       ),
       body: SingleChildScrollView(
@@ -72,31 +46,30 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
 
             // Headline
             Text(
-              widget.article.headline,
+              article.title,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
 
             // Supporting Text
             Text(
-              widget.article.supportingText,
+              article.summary!,
               style: TextStyle(fontSize: 16, color: Colors.grey[700]),
             ),
             const SizedBox(height: 16.0),
 
             // Published Date
             Text(
-              'Published: ${widget.article.publishedDate}',
+              'Author: ${article.author}',
               style: TextStyle(fontSize: 12, color: Colors.grey[600], fontStyle: FontStyle.italic),
             ),
             const SizedBox(height: 20.0),
             const Divider(),
             const SizedBox(height: 20.0),
 
-
             // Full Content
             Text(
-              widget.article.fullContent,
+              article.content,
               style: const TextStyle(fontSize: 16, height: 1.5),
             ),
           ],
