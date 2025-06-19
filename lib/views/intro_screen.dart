@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tahu_nih/views/auth_check_screen.dart';
 import 'package:tahu_nih/views/login_screen.dart';
 
 void main() {
@@ -112,7 +113,9 @@ class IntroPage extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(
+                          builder: (context) => AuthCheckScreen(),
+                        ),
                       );
                     },
                     child: Container(

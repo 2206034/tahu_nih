@@ -21,19 +21,22 @@ class RegisterPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
-                child: Text(
-                  'Daftar Yuk !',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(top: 24.0),
+                child: const Center(
+                  child: Text(
+                    'Daftar Yuk !',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 12),
               const Center(
                 child: Text(
-                  'Ayo Segera daftar ...................................\n.............................................................',
+                  'Ayo Segera daftar',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 14),
                 ),
@@ -46,7 +49,7 @@ class RegisterPage extends StatelessWidget {
                   hintText: 'Masukan Username',
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
 
               // Email / Phone
               TextField(
@@ -54,7 +57,7 @@ class RegisterPage extends StatelessWidget {
                   hintText: 'Email / Phone',
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
 
               // Password
               TextField(
@@ -63,7 +66,7 @@ class RegisterPage extends StatelessWidget {
                   hintText: 'Masukan Password',
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
 
               // Konfirmasi Password
               TextField(
@@ -72,7 +75,7 @@ class RegisterPage extends StatelessWidget {
                   hintText: 'Konfirmasi Password',
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 48),
 
               // Sign Up Button
               SizedBox(
@@ -82,21 +85,44 @@ class RegisterPage extends StatelessWidget {
                     // Logika sign up nanti ditaruh di sini
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightBlue[200],
+                    backgroundColor: const Color.fromARGB(255, 139, 172, 243),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
               ),
+              const SizedBox(height: 24),
+
+              // Regis Now
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    // Arahkan ke halaman register
+                    // Navigator.push(...);
+                  },
+                  child: const Text(
+                    'Login Now',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: 14,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
