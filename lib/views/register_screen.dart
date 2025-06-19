@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tahu_nih/views/auth_check_screen.dart';
+import 'package:tahu_nih/views/login_screen.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -110,8 +112,9 @@ class RegisterPage extends StatelessWidget {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    // Arahkan ke halaman register
-                    // Navigator.push(...);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => AuthCheckScreen()),
+                    );
                   },
                   child: const Text(
                     'Login Now',

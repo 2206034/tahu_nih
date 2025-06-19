@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tahu_nih/services/auth_service.dart';
 import 'package:tahu_nih/views/home_screen.dart';
+import 'package:tahu_nih/views/my_news_screen.dart';
 import 'package:tahu_nih/views/splash_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -74,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => MyNewsScreen()),
                     );
                   },
                   child: Container(
@@ -86,10 +87,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: 400,
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      'Berita Saya',
+                      'My News',
                       style: const TextStyle(
                         fontSize: 12,
-                        fontWeight: FontWeight.normal,
+                        fontWeight: FontWeight.w600,
                         color: Color.fromARGB(255, 0, 0, 0),
                       ),
                     ),
