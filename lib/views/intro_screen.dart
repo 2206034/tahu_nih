@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tahu_nih/views/login_screen.dart';
 
 void main() {
   runApp(const IntroScreen());
@@ -11,9 +12,7 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TahuNih!',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: const IntroPage(),
       debugShowCheckedModeBanner: false,
     );
@@ -30,17 +29,22 @@ class IntroPage extends StatelessWidget {
         child: Column(
           children: [
             // Logo section
-            Container(
-              color: const Color(0xFF1E73D7), // Warna biru seperti di gambar
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: double.infinity,
-              child: const Center(
-                child: Text(
-                  '📣 TahuNih!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 27, 95, 177),
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                height: MediaQuery.of(context).size.height * 0.5,
+                width: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    width: 400,
+                    height: 400,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -50,53 +54,83 @@ class IntroPage extends StatelessWidget {
             const Text(
               'TahuNih!',
               style: TextStyle(
-                fontSize: 28,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Poppins',
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             const Text(
               'Tiap Hari, Tahu Lagi',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-              ),
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
               child: Text(
                 'Berita terkini, gaya santai, Info penting & viral,\nlangsung ke kamu, biar nggak FOMO',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
               ),
             ),
-            const Spacer(),
+            const SizedBox(height: 28),
             // Buttons
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32.0,
+                vertical: 16,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.lightBlue[200],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 123, 139, 146),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: const Text('Register'),
+                      padding: const EdgeInsets.all(16.0),
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Center(
+                        child: const Text(
+                          'Register',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 16),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.lightBlue[200],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 123, 139, 146),
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: const Text('Login'),
+                      padding: const EdgeInsets.all(16.0),
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Center(
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ],

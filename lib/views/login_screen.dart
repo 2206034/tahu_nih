@@ -28,21 +28,27 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Center(
-                child: Text(
-                  'Selamat Datang !',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+              Container(
+                padding: const EdgeInsets.only(top: 32.0),
+                child: const Center(
+                  child: Text(
+                    'Selamat Datang !',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 12),
-              const Center(
-                child: Text(
-                  'Selamat datang Di aplikasi...................................\n.............................................................',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 14),
+              Container(
+                padding: const EdgeInsets.only(bottom: 32.0),
+                child: const Center(
+                  child: Text(
+                    'Selamat datang Di aplikasi',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ),
               ),
               const SizedBox(height: 32),
@@ -53,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: 'Masukan Username',
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
 
               // Password
               TextField(
@@ -101,22 +107,26 @@ class _LoginPageState extends State<LoginPage> {
                     // Logika sign in di sini
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightBlue[200],
+                    backgroundColor: const Color.fromARGB(255, 139, 172, 243),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: const Text(
-                    'Sign In',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: const Text(
+                      'Sign In',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 64),
 
               // Regis Now
               Center(
@@ -126,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                     // Navigator.push(...);
                   },
                   child: const Text(
-                    'Regis Now',
+                    'Regist Now',
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                       fontSize: 14,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tahu_nih/routes/route_names.dart';
+import 'package:tahu_nih/views/intro_screen.dart';
+import 'package:tahu_nih/views/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,7 +17,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
-        context.goNamed(RouteNames.home);
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (context) => LoginPage()));
       }
     });
   }
